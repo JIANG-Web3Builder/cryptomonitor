@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.claude/
+.DS_Store
+*.sqlite3
+*.db
+data/state/
+data/snapshots/
+data/asr_strategy/

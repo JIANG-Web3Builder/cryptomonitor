@@ -1,0 +1,57 @@
+{
+  "symbol": "BTCUSDT",
+  "version": "v17",
+  "timeframe_minutes": 15,
+  "data_csv_path": "D:/workspace/20260325/data/BTCUSDT_15m.csv",
+  "state_file": "state_v17_alert_v1.json",
+  "log_file": "alerts_sent_v17_alert_v1.csv",
+  "history_start_time": "2024-01-01 00:00:00",
+  "max_bars": 12000,
+  "only_closed_latest_bar": true,
+  "ignore_exit_ids": ["ForceClose"],
+  "send_start_mode": "skip_history_on_first_run",
+  "poll_seconds": 60,
+  "risk": {
+    "account_equity_usdt": 10000.0,
+    "max_total_position_pct": 1.0,
+    "long1_alloc_pct": 0.20,
+    "long2_alloc_pct": 0.40,
+    "long3_alloc_pct": 0.40,
+    "short1_alloc_pct": 0.20,
+    "short2_alloc_pct": 0.40,
+    "short3_alloc_pct": 0.40,
+    "trend_alloc_pct": 1.0,
+    "reverse_alloc_pct": 1.0,
+    "leverage_hint": "低杠杆或现货等值仓位优先；如使用合约，先按最大亏损和强平距离反推张数。"
+  },
+  "alert": {
+    "enabled": false,
+    "dry_run": true,
+    "webhook_url": "",
+    "method": "POST",
+    "timeout_seconds": 10,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload_mode": "json_text",
+    "text_field": "text"
+  },
+  "reminders": {
+    "entry": [
+      "先确认交易所 15m K线已经收盘，避免盘中假信号。",
+      "检查当前持仓方向：同向加仓按层级执行，反向信号先处理旧仓。",
+      "优先使用限价或分批成交，避免突破波动时滑点过大。",
+      "下单前确认止损参考位、计划仓位、最大亏损和资金占用。"
+    ],
+    "exit": [
+      "收到平仓/保护动作后优先处理风险，不要因为主观看法延迟。",
+      "若为止盈或 MFE 保护，注意取消旧止损/止盈挂单，避免反向误触发。",
+      "若为反转平仓，确认新方向信号是否同时出现，再决定是否开反向仓。"
+    ],
+    "general": [
+      "本程序只发送策略动作提醒，不自动下单。",
+      "实盘前请用交易所实时数据源复核价格、网络延迟和手续费滑点。",
+      "v17 为回测策略版本，预警不等于收益保证。"
+    ]
+  }
+}
